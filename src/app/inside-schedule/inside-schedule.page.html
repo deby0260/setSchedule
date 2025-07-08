@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inside Schedule</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="schedule-content" padding>
+  <form (ngSubmit)="saveSchedule()">
+    <!-- Fetcher Name Input -->
+    <ion-item>
+      <ion-label position="floating">Fetcher Name</ion-label>
+      <ion-input [(ngModel)]="fetcherName" name="fetcherName" required></ion-input>
+    </ion-item>
+
+    <!-- Day Selection -->
+    <ion-item>
+      <ion-label>Day</ion-label>
+      <ion-select [(ngModel)]="selectedDay" name="selectedDay" required>
+        <ion-select-option value="Monday">Monday</ion-select-option>
+        <ion-select-option value="Tuesday">Tuesday</ion-select-option>
+        <ion-select-option value="Wednesday">Wednesday</ion-select-option>
+        <ion-select-option value="Thursday">Thursday</ion-select-option>
+        <ion-select-option value="Friday">Friday</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Schedule Date Input -->
+    <ion-item>
+      <ion-label position="floating">Schedule Date</ion-label>
+      <ion-datetime [(ngModel)]="scheduleDate" name="scheduleDate" required></ion-datetime>
+    </ion-item>
+
+    <!-- Save Button -->
+    <ion-button expand="full" type="submit" [disabled]="!fetcherName || !selectedDay || !scheduleDate">
+      Save Schedule
+    </ion-button>
+  </form>
+</ion-content>

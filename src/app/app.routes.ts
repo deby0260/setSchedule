@@ -10,4 +10,12 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'schedule',
+    loadComponent: () => import('./schedule/schedule.page').then( m => m.SchedulePage)
+  },
+  {
+    path: 'inside-schedule',
+    loadComponent: () => import('./inside-schedule/inside-schedule.page').then( m => m.InsideSchedulePage)
+  },
 ];
