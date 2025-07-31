@@ -1,0 +1,111 @@
+<!-- Header with FetchSafe logo and back button -->
+<ion-header class="fetchsafe-header">
+  <ion-toolbar>
+    <div class="fetchsafe-header-content">
+      <ion-button fill="clear" class="fetchsafe-back-button" (click)="goBack()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+
+      <div class="fetchsafe-logo-section">
+        <div class="fetchsafe-logo-container">
+          <div class="fetchsafe-shield">
+            <div class="fetchsafe-figures">
+              <div class="fetchsafe-adult-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+              <div class="fetchsafe-child-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+            </div>
+            <div class="fetchsafe-checkmark-badge">
+              <ion-icon name="checkmark" class="checkmark-icon"></ion-icon>
+            </div>
+          </div>
+        </div>
+        <span class="fetchsafe-logo-text">FetchSafe</span>
+      </div>
+
+      <div class="header-spacer"></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="notifications-content">
+  <div class="page-title">
+    <h1>Notifications</h1>
+  </div>
+
+  <!-- Notifications List -->
+  <div class="notifications-list">
+    <div
+      class="notification-item"
+      *ngFor="let notification of notifications"
+      [class.unread]="!notification.isRead"
+      (click)="markAsRead(notification.id)">
+
+      <!-- Notification Icon -->
+      <div class="notification-icon">
+        <ion-icon
+          [name]="getNotificationIcon(notification.type)"
+          [class]="'icon-' + notification.type">
+        </ion-icon>
+      </div>
+
+      <!-- Notification Content -->
+      <div class="notification-content">
+        <div class="notification-header">
+          <span class="notification-type">{{ notification.type }}</span>
+          <span class="notification-time">{{ formatTime(notification.timestamp) }}</span>
+        </div>
+        <div class="notification-message">{{ notification.message }}</div>
+      </div>
+
+      <!-- Read Status Indicator -->
+      <div class="read-indicator" *ngIf="!notification.isRead">
+        <div class="unread-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="notifications.length === 0">
+    <ion-icon name="notifications-outline" class="empty-icon"></ion-icon>
+    <h3>No Notifications</h3>
+    <p>You're all caught up! New notifications will appear here.</p>
+  </div>
+
+  <!-- Bottom spacing -->
+  <div class="bottom-spacing"></div>
+</ion-content>
+
+<!-- FetchSafe Bottom Navigation -->
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item panic-nav">
+        <div class="fetchsafe-panic-button" (click)="panicAlert()">
+          <ion-icon name="warning-outline"></ion-icon>
+          <span class="fetchsafe-nav-label">Panic</span>
+        </div>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

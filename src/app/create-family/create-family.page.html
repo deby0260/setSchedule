@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <img src="assets/fetchsafe-logo.png" alt="FetchSafe Logo"
+        style="width: 66px; height: 66px; margin: 8px auto;" />
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Family Name Input -->
+  <div class="family-form-group">
+    <label class="family-label">Family Name</label>
+    <ion-input
+      class="family-input"
+      placeholder="Enter your Family Name"
+      [(ngModel)]="familyName">
+    </ion-input>
+  </div>
+
+  <!-- Upload Family Photo -->
+  <div style="margin: 14px 0;">
+    <button class="upload-photo-btn" (click)="uploadPhoto()">
+      <ion-icon name="add-outline" style="font-size:1.2em; vertical-align:middle; margin-right:3px;"></ion-icon>
+      Upload Family Photo
+    </button>
+    <img *ngIf="photoUrl" [src]="photoUrl" class="family-photo-preview" />
+  </div>
+
+  <!-- Children List -->
+  <div style="margin-top: 26px; margin-bottom: 14px;">
+    <span style="font-weight: 600; font-size: 1.01em;">Children</span>
+  </div>
+  <div *ngFor="let member of members; let i = index" class="member-row">
+    <ion-input
+      [(ngModel)]="member.name"
+      class="member-name-input"
+      placeholder="Child's Name"
+      [readonly]="true">
+    </ion-input>
+    <ion-input
+      [(ngModel)]="member.gradeLevel"
+      class="member-grade-input"
+      placeholder="Grade Level"
+      [readonly]="true">
+    </ion-input>
+    <button class="remove-member-btn" (click)="removeMember(i)">
+      <ion-icon name="remove-outline"></ion-icon>
+    </button>
+  </div>
+  <div>
+    <button class="add-member-btn" (click)="addMember()">+ Add Child</button>
+  </div>
+
+  <!-- Action Buttons -->
+  <div style="margin-top: 36px; margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+    <ion-button expand="block" class="finish-btn" (click)="finishEditing()">
+      Finish Editing
+    </ion-button>
+    <a class="cancel-btn" (click)="cancelEditing()">Cancel</a>
+  </div>
+</ion-content>
+
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item active" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

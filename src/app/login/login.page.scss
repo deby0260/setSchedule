@@ -1,0 +1,54 @@
+.login-bg {
+  --background: #fff;
+}
+.login-container {
+  max-width: 350px;
+  margin: 0 auto;
+  padding-top: 10vh;
+}
+.logo-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.logo-svg {
+  width: 64px;
+  height: 64px;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+.app-name {
+  color: #17303b;
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+.login-form {
+  margin-bottom: 25px;
+}
+.login-btn {
+  --background: #19a5b9;
+  --background-hover: #107d91;
+  --background-activated: #107d91;
+  --color: #fff;
+  border-radius: 22px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 20px;
+}
+.register-link {
+  text-align: center;
+  margin-top: 15px;
+  a {
+    color: #19a5b9;
+    margin-left: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+.logo-img {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px auto;
+  border-radius: 10px; /* Optional, for soft corners */
+}
+

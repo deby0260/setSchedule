@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center;">
+        <img src="assets/fetchsafe-logo.png" alt="FetchSafe Logo"
+          style="width: 38px; height: 38px; margin-right: 8px; margin-top: 3px;" />
+        <span style="font-size: 1.22em; font-weight: 700; color: #222; margin-top: 2px;">FetchSafe</span>
+      </div>
+      <ion-button fill="clear" (click)="goToNotifications()" style="font-size: 1.3em; margin-top: 4px;">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div style="margin-top: 12px;">
+    <h2 style="font-size: 1.13em; font-weight: bold; text-decoration: underline; color: #1a1a1a; margin-bottom: 16px;">
+      Register/Create a Family
+    </h2>
+  </div>
+
+  <div style="max-width: 92%; margin-bottom: 10px;">
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      (ionInput)="searchFamily($event)"
+      placeholder=""
+      style="--border-radius: 20px; --box-shadow: none; border: 2px solid #19a5b9; height: 38px;"
+      inputmode="search"
+      show-clear-button="never">
+    </ion-searchbar>
+  </div>
+
+  <!-- FAMILY LIST DISPLAY -->
+  <div class="family-list-container">
+    <div *ngIf="filteredFamilies.length === 0" class="no-family-text">
+      <ion-icon name="people-outline" style="font-size: 1.7em; color: #a9a9a9;"></ion-icon>
+      <span style="margin-left: 8px;">No matching families found</span>
+    </div>
+    <ion-card *ngFor="let fam of filteredFamilies" class="family-card">
+      <ion-card-content>
+        <div style="display: flex; align-items: center;">
+          <ion-icon name="people-outline" style="font-size: 1.8em; color: #19a5b9; margin-right: 10px;"></ion-icon>
+          <span style="font-weight: 600; font-size: 1.08em; flex: 1;">{{ fam.name }}</span>
+          <!-- Add Edit/View buttons here if needed -->
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- FAB -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="createFamily()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<!-- Custom Bottom Navigation Bar -->
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item active" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

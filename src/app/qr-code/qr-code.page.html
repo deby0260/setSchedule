@@ -1,0 +1,137 @@
+<!-- Header with back button and FetchSafe logo -->
+<ion-header class="fetchsafe-header">
+  <ion-toolbar>
+    <div class="fetchsafe-header-content">
+      <ion-button
+        fill="clear"
+        class="fetchsafe-back-button"
+        (click)="goBack()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+
+      <div class="fetchsafe-logo-section">
+        <div class="fetchsafe-logo-container">
+          <div class="fetchsafe-shield">
+            <div class="fetchsafe-figures">
+              <div class="fetchsafe-adult-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+              <div class="fetchsafe-child-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+            </div>
+            <div class="fetchsafe-checkmark-badge">
+              <ion-icon name="checkmark" class="checkmark-icon"></ion-icon>
+            </div>
+          </div>
+        </div>
+        <span class="fetchsafe-logo-text">FetchSafe</span>
+      </div>
+
+      <div class="header-spacer"></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="qr-content" (click)="goHome()">
+  <!-- QR Code Section -->
+  <div class="qr-container">
+
+    <!-- Title Section -->
+    <div class="title-section">
+      <h1 class="qr-title">Secure QR Code</h1>
+      <p class="qr-subtitle">Authorized Guardian/Fetcher</p>
+
+      <!-- Online/Offline Status -->
+      <div class="status-indicator">
+        <div class="status-badge" [class.online]="isOnline" [class.offline]="!isOnline">
+          <ion-icon [name]="isOnline ? 'wifi' : 'wifi-outline'" class="status-icon"></ion-icon>
+          <span class="status-text">{{ isOnline ? 'Online' : 'Offline' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- QR Code Display -->
+    <div class="qr-code-container">
+      <div class="qr-code-wrapper">
+        <img
+          [src]="qrCodeImageUrl"
+          [alt]="'QR Code for ' + qrCodeId"
+          class="qr-code-image"
+          (load)="onQRCodeLoaded()"
+          (error)="onQRCodeError()">
+        <div class="qr-loading" *ngIf="isLoadingQR">
+          <ion-spinner name="crescent"></ion-spinner>
+          <p>Generating QR Code...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions-section">
+      <p class="instructions-text">Show this QR code at pickup</p>
+    </div>
+
+    <!-- Refresh Button -->
+    <div class="refresh-section">
+      <ion-button
+        expand="block"
+        class="refresh-button"
+        (click)="refreshQRCode()">
+        Refresh Code
+      </ion-button>
+    </div>
+
+    <!-- QR Code Info -->
+    <div class="qr-info-section">
+      <div class="info-item">
+        <span class="info-label">Generated:</span>
+        <span class="info-value">{{ generatedTime }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Valid for:</span>
+        <span class="info-value">{{ validityDuration }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Code ID:</span>
+        <span class="info-value">{{ qrCodeId }}</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom spacing for navigation -->
+  <div class="bottom-spacing"></div>
+</ion-content>
+
+<!-- FetchSafe Bottom Navigation -->
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item active" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item panic-nav">
+        <div class="fetchsafe-panic-button" (click)="panicAlert()">
+          <ion-icon name="warning-outline"></ion-icon>
+          <span class="fetchsafe-nav-label">Panic</span>
+        </div>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,17 +1,232 @@
-<ion-header>
+<!-- FetchSafe Header -->
+<ion-header class="fetchsafe-header">
   <ion-toolbar>
-    <ion-title>Set Schedule</ion-title>
+    <div class="fetchsafe-header-content">
+      <div class="fetchsafe-logo-section">
+        <div class="fetchsafe-logo-container">
+          <div class="fetchsafe-shield">
+            <div class="fetchsafe-figures">
+              <div class="fetchsafe-adult-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+              <div class="fetchsafe-child-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+            </div>
+            <div class="fetchsafe-checkmark-badge">
+              <ion-icon name="checkmark" class="checkmark-icon"></ion-icon>
+            </div>
+          </div>
+        </div>
+        <span class="fetchsafe-logo-text">FetchSafe</span>
+      </div>
+      <ion-button fill="clear" class="fetchsafe-notification-btn" (click)="goToNotifications()">
+        <ion-icon name="notifications-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card (click)="openCalendar()">
-    <ion-card-header>
-      <ion-card-title>Set Schedule</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-icon name="calendar" slot="start" size="large"></ion-icon>
-      <span>Manage pickup days/times</span>
-    </ion-card-content>
-  </ion-card>
+<ion-content class="fetchsafe-page-content">
+  <!-- Weather Card -->
+  <div class="fetchsafe-weather-container">
+    <div class="fetchsafe-card fetchsafe-weather-card" *ngIf="currentWeather">
+      <div class="fetchsafe-weather-header">
+        <div class="fetchsafe-weather-icon-container">
+          <ion-icon [name]="currentWeather.ionicIcon" class="fetchsafe-weather-icon"></ion-icon>
+        </div>
+        <div class="fetchsafe-weather-info">
+          <div class="fetchsafe-weather-temp">{{ currentWeather.temperature }}°C</div>
+          <div class="fetchsafe-weather-desc">{{ currentWeather.description | titlecase }}</div>
+          <div class="fetchsafe-weather-location">{{ currentWeather.city }}, {{ currentWeather.country }}</div>
+        </div>
+        <div class="fetchsafe-weather-actions">
+          <button class="fetchsafe-button btn-ghost btn-small" (click)="getTalisayWeather()" title="Get Talisay, Cebu weather">
+            <ion-icon name="location-outline"></ion-icon>
+          </button>
+          <button class="fetchsafe-button btn-ghost btn-small" (click)="loadWeather()" title="Refresh weather">
+            <ion-icon name="refresh-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+      <div class="fetchsafe-weather-recommendation">
+        <ion-icon name="information-circle-outline" class="fetchsafe-recommendation-icon"></ion-icon>
+        <span>{{ currentWeather.recommendation }}</span>
+      </div>
+    </div>
+
+    <!-- Loading Weather -->
+    <div class="fetchsafe-card fetchsafe-weather-loading" *ngIf="isLoadingWeather">
+      <div class="fetchsafe-loading-content">
+        <ion-spinner name="crescent" class="fetchsafe-spinner"></ion-spinner>
+        <span class="fetchsafe-body">Loading weather...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Welcome Section -->
+  <div class="fetchsafe-welcome-container">
+<h1 class="fetchsafe-title-large">Welcome, {{ userName }}!</h1>
+
+    <p class="fetchsafe-subtitle">Manage your pickup schedules and stay connected</p>
+  </div>
+
+  <!-- Action Cards Grid -->
+  <div class="fetchsafe-action-grid">
+    <div class="fetchsafe-card card-interactive fetchsafe-action-card" (click)="viewAnalytics()">
+      <div class="fetchsafe-action-icon-container">
+        <ion-icon name="bar-chart-outline" class="fetchsafe-action-icon"></ion-icon>
+      </div>
+      <div class="fetchsafe-action-content">
+        <h3 class="fetchsafe-title-small">View Analytics</h3>
+        <p class="fetchsafe-body-small">View Pickup Analytics & Incident Trends</p>
+      </div>
+    </div>
+
+    <div class="fetchsafe-card card-interactive fetchsafe-action-card" (click)="digitalConsent()">
+      <div class="fetchsafe-action-icon-container">
+        <ion-icon name="document-text-outline" class="fetchsafe-action-icon"></ion-icon>
+      </div>
+      <div class="fetchsafe-action-content">
+        <h3 class="fetchsafe-title-small">Digital Consent</h3>
+        <p class="fetchsafe-body-small">Create Digital Consent Forms for the Fetchers</p>
+      </div>
+    </div>
+
+    <div class="fetchsafe-card card-interactive fetchsafe-action-card" (click)="setSchedule()">
+      <div class="fetchsafe-action-icon-container">
+        <ion-icon name="calendar-outline" class="fetchsafe-action-icon"></ion-icon>
+      </div>
+      <div class="fetchsafe-action-content">
+        <h3 class="fetchsafe-title-small">Set Schedule</h3>
+        <p class="fetchsafe-body-small">Manage pickup days/times</p>
+      </div>
+    </div>
+
+    <div class="fetchsafe-card card-interactive fetchsafe-action-card" (click)="displayQR()">
+      <div class="fetchsafe-action-icon-container">
+        <ion-icon name="qr-code-outline" class="fetchsafe-action-icon"></ion-icon>
+      </div>
+      <div class="fetchsafe-action-content">
+        <h3 class="fetchsafe-title-small">Display QR Code</h3>
+        <p class="fetchsafe-body-small">Display Personal QR Code for Pickup</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upcoming Pickups Section -->
+  <div class="fetchsafe-upcoming-container">
+    <div class="fetchsafe-section-header">
+      <h2 class="fetchsafe-title-medium">Upcoming Pickups</h2>
+      <button class="fetchsafe-button btn-ghost btn-small" (click)="viewSchedule()">
+        View Schedule
+      </button>
+    </div>
+
+    <!-- Pickup Cards -->
+    <div class="fetchsafe-pickup-grid" *ngIf="upcomingPickups.length > 0">
+      <!-- Next Pickup Card -->
+      <div class="fetchsafe-card fetchsafe-pickup-card">
+        <div class="fetchsafe-pickup-header">
+          <div class="fetchsafe-avatar avatar-md">
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </div>
+          <div class="fetchsafe-pickup-info">
+            <h4 class="fetchsafe-subtitle">{{ upcomingPickups[0].fetcher }}</h4>
+            <p class="fetchsafe-body-small">{{ upcomingPickups[0].role || 'Fetcher' }}</p>
+          </div>
+          <div class="fetchsafe-pickup-status">
+            <span class="fetchsafe-status-badge" [class]="'status-' + upcomingPickups[0].status.toLowerCase()">
+              {{ upcomingPickups[0].status }}
+            </span>
+          </div>
+        </div>
+        <div class="fetchsafe-pickup-schedule">
+          <div class="fetchsafe-schedule-item">
+            <ion-icon name="time-outline" class="fetchsafe-schedule-icon"></ion-icon>
+            <span class="fetchsafe-body">{{ upcomingPickups[0].time }}</span>
+          </div>
+          <div class="fetchsafe-schedule-item">
+            <ion-icon name="calendar-outline" class="fetchsafe-schedule-icon"></ion-icon>
+            <span class="fetchsafe-body">{{ upcomingPickups[0].displayDate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reliability Card -->
+      <div class="fetchsafe-card fetchsafe-reliability-card">
+        <div class="fetchsafe-reliability-header">
+          <div class="fetchsafe-reliability-icon">
+            <ion-icon name="trending-up-outline"></ion-icon>
+          </div>
+          <div class="fetchsafe-reliability-info">
+            <h4 class="fetchsafe-title-small">{{ getReliabilityPercentage() }}%</h4>
+            <p class="fetchsafe-body-small">On Time Performance</p>
+          </div>
+        </div>
+        <div class="fetchsafe-reliability-status">
+          <span class="fetchsafe-status-badge status-success">{{ getReliabilityText() }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="fetchsafe-empty-state" *ngIf="upcomingPickups.length === 0">
+      <div class="fetchsafe-card">
+        <div class="fetchsafe-empty-content">
+          <div class="fetchsafe-empty-icon">
+            <ion-icon name="calendar-outline"></ion-icon>
+          </div>
+          <h3 class="fetchsafe-title-small">No Upcoming Pickups</h3>
+          <p class="fetchsafe-body">Create a schedule to see upcoming pickups here</p>
+          <button class="fetchsafe-button btn-primary" (click)="setSchedule()">
+            Create Schedule
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Consent Letter Section -->
+    <div class="fetchsafe-consent-container">
+      <button class="fetchsafe-button btn-outline" (click)="showConsentLetter()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        Show Consent Letter
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom spacing for navigation -->
+  <div class="fetchsafe-bottom-spacing"></div>
 </ion-content>
+
+<!-- FetchSafe Bottom Navigation -->
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item active" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item panic-nav">
+        <div class="fetchsafe-panic-button" (click)="panicAlert()">
+          <ion-icon name="warning-outline"></ion-icon>
+          <span class="fetchsafe-nav-label">Panic</span>
+        </div>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

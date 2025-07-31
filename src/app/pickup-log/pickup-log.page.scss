@@ -1,0 +1,396 @@
+/* Pickup Log Page Styles */
+@import '../../global-fetchsafe.scss';
+
+/* Overall Page Styling */
+.pickup-log-content {
+  background-color: var(--fetchsafe-bg-secondary) !important;
+  --background: var(--fetchsafe-bg-secondary) !important;
+  padding: 0;
+  @extend .fetchsafe-typography;
+}
+
+/* FetchSafe Header */
+.fetchsafe-header {
+  --background: var(--fetchsafe-bg-primary);
+  --border-color: var(--fetchsafe-border-light);
+  box-shadow: 0 2px 8px var(--fetchsafe-shadow-light);
+
+  ion-toolbar {
+    --background: var(--fetchsafe-bg-primary);
+    --border-width: 0;
+    --min-height: 64px;
+  }
+}
+
+.fetchsafe-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  height: 64px;
+}
+
+.fetchsafe-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* FetchSafe Logo Container */
+.fetchsafe-logo-container {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+/* Shield Outline */
+.fetchsafe-shield {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border: 3px solid var(--fetchsafe-primary);
+  border-radius: 8px 8px 20px 20px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+
+/* Human Figures Container */
+.fetchsafe-figures {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  position: relative;
+}
+
+/* Adult Figure */
+.fetchsafe-adult-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .figure-head {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--fetchsafe-primary);
+    margin-bottom: 1px;
+  }
+
+  .figure-body {
+    width: 10px;
+    height: 14px;
+    border-radius: 5px 5px 0 0;
+    background: var(--fetchsafe-primary);
+  }
+}
+
+/* Child Figure */
+.fetchsafe-child-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .figure-head {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fetchsafe-primary);
+    margin-bottom: 1px;
+  }
+
+  .figure-body {
+    width: 8px;
+    height: 10px;
+    border-radius: 4px 4px 0 0;
+    background: var(--fetchsafe-primary);
+  }
+}
+
+/* Checkmark Badge */
+.fetchsafe-checkmark-badge {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 16px;
+  height: 16px;
+  background: var(--fetchsafe-primary);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+
+  .checkmark-icon {
+    font-size: 9px;
+    color: white;
+    font-weight: bold;
+  }
+}
+
+/* Logo Text */
+.fetchsafe-logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--fetchsafe-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.fetchsafe-notification-btn {
+  --color: var(--fetchsafe-text-secondary);
+  --color-hover: var(--fetchsafe-primary);
+  --padding-start: 8px;
+  --padding-end: 8px;
+
+  ion-icon {
+    font-size: 24px;
+  }
+}
+
+.notification-btn {
+  --color: #666666;
+  --padding-start: 8px;
+  --padding-end: 8px;
+
+  ion-icon {
+    font-size: 24px;
+  }
+}
+
+/* Log Container */
+.log-container {
+  padding: 20px;
+}
+
+/* Date Section Headers */
+.date-section {
+  margin-bottom: 24px;
+}
+
+.date-header {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+  padding-left: 4px;
+}
+
+/* Log Items */
+.log-item {
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #e9ecef;
+  overflow: hidden;
+}
+
+.log-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 12px;
+}
+
+.log-icon {
+  width: 32px;
+  height: 32px;
+  background: #2dd4bf;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.location-icon {
+  font-size: 16px;
+  color: white;
+}
+
+.log-details {
+  flex: 1;
+}
+
+.log-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.log-date {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.log-time {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.close-icon {
+  font-size: 18px;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+
+  &:hover {
+    color: #666;
+  }
+}
+
+.log-message {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.log-person {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+
+  .empty-icon {
+    font-size: 64px;
+    color: #ccc;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 0;
+  }
+}
+
+/* FetchSafe Bottom Navigation */
+.fetchsafe-bottom-nav {
+  --background: var(--fetchsafe-bg-primary);
+  --border-color: var(--fetchsafe-border-light);
+  box-shadow: 0 -2px 8px var(--fetchsafe-shadow-light);
+
+  ion-toolbar {
+    --background: var(--fetchsafe-bg-primary);
+    --border-width: 0;
+    --min-height: 80px;
+  }
+}
+
+.fetchsafe-nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 16px;
+  height: 80px;
+}
+
+.fetchsafe-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  cursor: pointer;
+  padding: 8px 4px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--fetchsafe-bg-secondary);
+  }
+
+  &.active {
+    .fetchsafe-nav-label {
+      color: var(--fetchsafe-primary);
+      font-weight: 600;
+    }
+
+    ion-icon {
+      color: var(--fetchsafe-primary);
+    }
+  }
+
+  ion-icon {
+    font-size: 24px;
+    color: var(--fetchsafe-text-secondary);
+    margin-bottom: 4px;
+    transition: color 0.2s ease;
+  }
+}
+
+.fetchsafe-nav-label {
+  font-size: 12px;
+  color: var(--fetchsafe-text-secondary);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+  transition: color 0.2s ease;
+}
+
+.panic-nav {
+  padding: 0;
+  gap: 0;
+
+  .fetchsafe-panic-button {
+    background: var(--fetchsafe-error);
+    color: white;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: 3px solid white;
+    gap: 0;
+    text-align: center;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    ion-icon {
+      color: white !important;
+      font-size: 20px;
+      margin-bottom: 2px;
+    }
+
+    .fetchsafe-nav-label {
+      color: white !important;
+      font-weight: 600;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+.bottom-spacing {
+  height: 20px;
+}

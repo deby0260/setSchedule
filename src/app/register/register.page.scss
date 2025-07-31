@@ -1,0 +1,150 @@
+.register-bg {
+  --background: #fff;
+}
+
+.register-container {
+  max-width: 320px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 18px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  margin-top: 8px;
+}
+
+.logo-svg {
+  width: 54px;
+  height: 54px;
+  margin-right: 8px;
+}
+
+.app-name {
+  font-size: 2.1rem;
+  font-weight: bold;
+  color: #17303b;
+  letter-spacing: -0.5px;
+}
+
+.safe-word {
+  color: #17303b;
+  font-weight: bold;
+}
+
+.register-title {
+  margin-bottom: 18px;
+  font-size: 1.13rem;
+  color: #222;
+  font-weight: 400;
+  text-align: center;
+}
+
+.register-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* FIX: Make all inputs the same, rounded, aligned */
+.register-input {
+  width: 100%;
+  margin-bottom: 12px;
+  display: flex;
+}
+.register-input ion-input {
+  --background: #fff;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --highlight-color-focused: #19a5b9;
+  border: 2px solid #19a5b9;
+  border-radius: 18px;
+  padding: 9px 14px;
+  font-size: 1.09rem;
+  color: #222;
+  width: 100%;
+  outline: none;
+  --border-radius: 18px;
+}
+
+/* Remove inner box shadow on iOS Safari */
+.register-input ion-input::-webkit-input-placeholder { color: #aaa; }
+.register-input ion-input:-ms-input-placeholder { color: #aaa; }
+.register-input ion-input::placeholder { color: #aaa; }
+
+.upload-photo-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 17px;
+}
+
+.upload-label {
+  display: flex;
+  align-items: center;
+  border: 2px solid #19a5b9;
+  border-radius: 13px;
+  padding: 11px 14px;
+  font-size: 1.07rem;
+  color: #222;
+  width: 100%;
+  cursor: pointer;
+  background: #fff;
+  justify-content: center;
+  transition: background 0.13s;
+  margin-bottom: 5px;
+}
+
+.upload-label:hover {
+  background: #f1fdff;
+}
+
+.camera-icon {
+  font-size: 2rem;
+  color: #17303b;
+  margin-right: 7px;
+}
+
+.photo-preview {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-top: 7px;
+  object-fit: cover;
+  border: 1.5px solid #19a5b9;
+}
+
+.register-btn {
+  --background: #19a5b9;
+  --background-hover: #107d91;
+  --background-activated: #107d91;
+  --color: #fff;
+  border-radius: 22px;
+  font-size: 1.13rem;
+  font-weight: 500;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.register-link {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  color: #222;
+  margin-bottom: 15px;
+  margin-top: 3px;
+  a {
+    color: #19a5b9;
+    margin-left: 3px;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 500;
+  }
+}

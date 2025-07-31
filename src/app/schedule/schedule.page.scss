@@ -1,45 +1,1198 @@
-ion-card {
-  margin: 20px;
-  border-radius: 15px;
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background-color: #ffffff; /* Light background for card */
+/* FetchSafe Schedule Page Styles */
+@import '../../global-fetchsafe.scss';
+
+/* Page Container */
+.fetchsafe-page-content {
+  --background: var(--fetchsafe-bg-secondary);
+  padding: 0;
+  @extend .fetchsafe-typography;
 }
 
-ion-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15);
+/* Force FetchSafe background */
+ion-content {
+  --background: var(--fetchsafe-bg-secondary) !important;
+  background-color: var(--fetchsafe-bg-secondary) !important;
 }
 
-ion-card-header {
-  background-color: #f9f9f9;  /* Light grey background for header */
-  border-radius: 15px 15px 0 0;
-  padding: 15px;
+:host {
+  --ion-background-color: var(--fetchsafe-bg-secondary) !important;
+  background-color: var(--fetchsafe-bg-secondary) !important;
+  @extend .fetchsafe-typography;
 }
 
-ion-card-title {
-  font-weight: bold;
-  color: #333333;  /* Darker text for the title */
-  font-size: 18px;
+/* Header Styles */
+.fetchsafe-header {
+  --background: var(--fetchsafe-bg-primary);
+  --border-color: var(--fetchsafe-border-light);
+  box-shadow: 0 2px 8px var(--fetchsafe-shadow-light);
+
+  ion-toolbar {
+    --background: var(--fetchsafe-bg-primary);
+    --border-width: 0;
+    --min-height: 64px;
+  }
 }
 
-ion-card-content {
+.fetchsafe-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  height: 64px;
+}
+
+.fetchsafe-logo-section {
   display: flex;
   align-items: center;
+  gap: 12px;
+}
+
+/* FetchSafe Logo Container */
+.fetchsafe-logo-container {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+/* Shield Outline */
+.fetchsafe-shield {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border: 3px solid var(--fetchsafe-primary);
+  border-radius: 8px 8px 20px 20px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+
+/* Human Figures Container */
+.fetchsafe-figures {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  position: relative;
+}
+
+/* Adult Figure */
+.fetchsafe-adult-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .figure-head {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--fetchsafe-primary);
+    margin-bottom: 1px;
+  }
+
+  .figure-body {
+    width: 10px;
+    height: 14px;
+    border-radius: 5px 5px 0 0;
+    background: var(--fetchsafe-primary);
+  }
+}
+
+/* Child Figure */
+.fetchsafe-child-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .figure-head {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fetchsafe-primary);
+    margin-bottom: 1px;
+  }
+
+  .figure-body {
+    width: 8px;
+    height: 10px;
+    border-radius: 4px 4px 0 0;
+    background: var(--fetchsafe-primary);
+  }
+}
+
+/* Checkmark Badge */
+.fetchsafe-checkmark-badge {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 16px;
+  height: 16px;
+  background: var(--fetchsafe-primary);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+
+  .checkmark-icon {
+    font-size: 9px;
+    color: white;
+    font-weight: bold;
+  }
+}
+
+.fetchsafe-logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--fetchsafe-text-primary);
+}
+
+.fetchsafe-notification-btn {
+  --color: var(--fetchsafe-text-secondary);
+  --color-hover: var(--fetchsafe-primary);
+  --padding-start: 8px;
+  --padding-end: 8px;
+
+  ion-icon {
+    font-size: 24px;
+  }
+}
+
+/* Weather Card Styles */
+.fetchsafe-weather-container {
+  padding: 20px 24px;
+}
+
+.fetchsafe-weather-card {
+  @extend .fetchsafe-card;
+  margin-bottom: 0;
+}
+
+.fetchsafe-weather-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.fetchsafe-weather-icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(32, 178, 170, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fetchsafe-weather-icon {
+  font-size: 24px;
+  color: var(--fetchsafe-primary);
+}
+
+.fetchsafe-weather-info {
+  flex: 1;
+}
+
+.fetchsafe-weather-temp {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--fetchsafe-text-primary);
+  margin-bottom: 4px;
+}
+
+.fetchsafe-weather-desc {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fetchsafe-text-secondary);
+  margin-bottom: 2px;
+}
+
+.fetchsafe-weather-location {
+  font-size: 12px;
+  color: var(--fetchsafe-text-tertiary);
+}
+
+.fetchsafe-weather-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.fetchsafe-weather-recommendation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: var(--fetchsafe-bg-secondary);
+  border-radius: 8px;
+
+  .fetchsafe-recommendation-icon {
+    font-size: 16px;
+    color: var(--fetchsafe-primary);
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 14px;
+    color: var(--fetchsafe-text-secondary);
+    line-height: 1.4;
+  }
+}
+
+.fetchsafe-weather-loading {
+  @extend .fetchsafe-card;
+  margin-bottom: 0;
+}
+
+.fetchsafe-loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+}
+
+.fetchsafe-spinner {
+  --color: var(--fetchsafe-primary);
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #20B2AA;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon {
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.notification-btn {
+  --color: #666666;
+  --padding-start: 8px;
+  --padding-end: 8px;
+
+  ion-icon {
+    font-size: 24px;
+  }
+}
+
+/* Weather Alert Section */
+.weather-alert {
+  display: flex;
+  align-items: center;
+  margin: 24px;
+  padding: 20px;
+  background-color: #fff8e1;
+  border-radius: 16px;
+  border-left: 4px solid #ffc107;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  &.loading {
+    justify-content: center;
+    gap: 16px;
+  }
+}
+
+.weather-icon {
+  font-size: 28px;
+  color: #f39c12;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.weather-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.weather-temp {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.weather-desc {
   font-size: 16px;
-  color: #777777; /* Grey text color for content */
-  padding: 10px 15px;
+  color: #666666;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-ion-icon {
-  margin-right: 15px;
-  color: #3880ff; /* Blue color for the calendar icon (same as Ionic's default accent color) */
-  font-size: 24px; /* Size of the icon */
+.weather-location {
+  font-size: 14px;
+  color: #888888;
+  margin-left: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Optional: A subtle effect when card is clicked */
-ion-card:active {
-  transform: scale(1);
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+.weather-recommendation {
+  font-size: 14px;
+  color: #856404;
+  line-height: 1.4;
+  margin-top: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.weather-text {
+  font-size: 16px;
+  color: #856404;
+  flex: 1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.weather-spinner {
+  --color: #f39c12;
+  width: 24px;
+  height: 24px;
+}
+
+.weather-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.weather-action-btn {
+  --color: #666666;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  min-width: 40px;
+  border-radius: 12px;
+
+  ion-icon {
+    font-size: 20px;
+  }
+
+  &:hover {
+    --color: #20B2AA;
+  }
+}
+
+/* Welcome Section */
+.welcome-section {
+  padding: 0 24px;
+  margin-bottom: 32px;
+}
+
+.welcome-section h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Action Cards Grid */
+.action-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 0 24px;
+  margin-bottom: 40px;
+}
+
+.fetchsafe-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 140px;
+  border: 1px solid #f0f0f0;
+}
+
+.fetchsafe-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon-container {
+  width: 48px;
+  height: 48px;
+  background-color: #f0f9ff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.card-icon {
+  font-size: 28px;
+  color: #20B2AA;
+}
+
+.card-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0 0 8px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.card-content p {
+  font-size: 14px;
+  color: #666666;
+  margin: 0;
+  line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Upcoming Pickups Section */
+.upcoming-section {
+  padding: 0 24px;
+  margin-bottom: 120px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.view-schedule-link {
+  font-size: 16px;
+  color: #20B2AA;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  &:hover {
+    color: #1a9b94;
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: #168680;
+  }
+}
+
+/* Notification List */
+.pickup-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.notification-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification-date-header {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0 0 8px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.notification-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+
+  &.unread {
+    background: #ffffff;
+    border-color: #2dd4bf;
+    box-shadow: 0 2px 8px rgba(45, 212, 191, 0.1);
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Notification Icon */
+.notification-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  flex-shrink: 0;
+
+  ion-icon {
+    font-size: 20px;
+
+    &.icon-Schedule {
+      color: #2dd4bf;
+      background: rgba(45, 212, 191, 0.1);
+      border-radius: 50%;
+      padding: 10px;
+    }
+
+    &.icon-Pickup {
+      color: #f59e0b;
+      background: rgba(245, 158, 11, 0.1);
+      border-radius: 50%;
+      padding: 10px;
+    }
+
+    &.icon-Success {
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+      border-radius: 50%;
+      padding: 10px;
+    }
+
+    &.icon-Request {
+      color: #6366f1;
+      background: rgba(99, 102, 241, 0.1);
+      border-radius: 50%;
+      padding: 10px;
+    }
+  }
+}
+
+/* Notification Content */
+.notification-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.notification-type {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #888;
+}
+
+.notification-message {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Read Status Indicator */
+.read-indicator {
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.unread-dot {
+  width: 8px;
+  height: 8px;
+  background: #2dd4bf;
+  border-radius: 50%;
+}
+
+.pickup-status-badge.completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* Reliability Card */
+.reliability-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.reliability-icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #e8f5e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.reliability-icon-circle ion-icon {
+  font-size: 32px;
+  color: #2e7d32;
+}
+
+.reliability-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reliability-percentage {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.reliability-label {
+  font-size: 14px;
+  color: #666666;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.reliability-status {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #e8f5e8;
+  color: #2e7d32;
+  align-self: flex-start;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Empty Pickups State */
+.empty-pickups {
+  text-align: center;
+  padding: 60px 24px;
+
+  .empty-icon {
+    font-size: 64px;
+    color: #cccccc;
+    margin-bottom: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  p {
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 32px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .create-schedule-btn {
+    --background: #20B2AA;
+    --color: white;
+    --border-radius: 24px;
+    height: 48px;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0 32px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Consent Button */
+.consent-button-container {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.consent-button {
+  --color: #20B2AA;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* FetchSafe Bottom Navigation */
+.fetchsafe-bottom-nav {
+  ion-toolbar {
+    --background: #ffffff;
+    --border-width: 1px 0 0 0;
+    --border-color: #e0e0e0;
+    --min-height: 90px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 0;
+  height: 90px;
+  position: relative;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  cursor: pointer;
+  padding: 8px;
+  gap: 4px;
+}
+
+.nav-item ion-icon {
+  font-size: 24px;
+  color: #666666;
+  transition: color 0.2s ease;
+}
+
+.nav-item.active ion-icon {
+  color: #20B2AA;
+}
+
+.nav-item:hover ion-icon {
+  color: #20B2AA;
+}
+
+.nav-label {
+  font-size: 12px;
+  color: #666666;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: color 0.2s ease;
+}
+
+.nav-item.active .nav-label {
+  color: #20B2AA;
+}
+
+.nav-item:hover .nav-label {
+  color: #20B2AA;
+}
+
+/* Panic Button in Navigation */
+.panic-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panic-button {
+  background-color: #dc3545;
+  color: white;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(220, 53, 69, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 4px solid white;
+  text-align: center;
+  line-height: 1.1;
+  position: relative;
+  top: -8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.panic-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 12px rgba(220, 53, 69, 0.5);
+}
+
+.panic-button span {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bottom-spacing {
+  height: 24px;
+}
+
+/* ===== FETCHSAFE DESIGN SYSTEM OVERRIDES ===== */
+
+/* Welcome Section */
+.fetchsafe-welcome-container {
+  padding: 24px 24px 20px 24px;
+
+  .fetchsafe-title-large {
+    margin-bottom: 8px;
+  }
+
+  .fetchsafe-subtitle {
+    margin-bottom: 0;
+  }
+}
+
+/* Action Cards Grid */
+.fetchsafe-action-grid {
+  padding: 0 24px 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.fetchsafe-action-card {
+  @extend .fetchsafe-card;
+  @extend .card-interactive;
+  padding: 20px;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 120px;
+}
+
+.fetchsafe-action-icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(32, 178, 170, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.fetchsafe-action-icon {
+  font-size: 24px;
+  color: var(--fetchsafe-primary);
+}
+
+.fetchsafe-action-content {
+  flex: 1;
+
+  .fetchsafe-title-small {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .fetchsafe-body-small {
+    margin-bottom: 0;
+    line-height: 1.3;
+  }
+}
+
+/* Upcoming Pickups Section */
+.fetchsafe-upcoming-container {
+  padding: 0 24px 20px 24px;
+}
+
+.fetchsafe-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .fetchsafe-title-medium {
+    margin-bottom: 0;
+  }
+}
+
+.fetchsafe-pickup-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fetchsafe-pickup-card {
+  @extend .fetchsafe-card;
+  margin-bottom: 0;
+}
+
+.fetchsafe-pickup-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.fetchsafe-pickup-info {
+  flex: 1;
+
+  .fetchsafe-subtitle {
+    margin-bottom: 4px;
+  }
+
+  .fetchsafe-body-small {
+    margin-bottom: 0;
+  }
+}
+
+.fetchsafe-pickup-status {
+  .fetchsafe-status-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+
+    &.status-confirmed {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--fetchsafe-success);
+    }
+
+    &.status-pending {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--fetchsafe-warning);
+    }
+
+    &.status-success {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--fetchsafe-success);
+    }
+  }
+}
+
+.fetchsafe-pickup-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fetchsafe-schedule-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .fetchsafe-schedule-icon {
+    font-size: 16px;
+    color: var(--fetchsafe-text-tertiary);
+  }
+}
+
+/* Reliability Card */
+.fetchsafe-reliability-card {
+  @extend .fetchsafe-card;
+  margin-bottom: 0;
+}
+
+.fetchsafe-reliability-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.fetchsafe-reliability-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 24px;
+    color: var(--fetchsafe-success);
+  }
+}
+
+.fetchsafe-reliability-info {
+  flex: 1;
+
+  .fetchsafe-title-small {
+    margin-bottom: 4px;
+  }
+
+  .fetchsafe-body-small {
+    margin-bottom: 0;
+  }
+}
+
+/* Empty State */
+.fetchsafe-empty-state {
+  padding: 0 24px;
+}
+
+.fetchsafe-empty-content {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.fetchsafe-empty-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--fetchsafe-bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+
+  ion-icon {
+    font-size: 40px;
+    color: var(--fetchsafe-text-light);
+  }
+}
+
+/* Consent Section */
+.fetchsafe-consent-container {
+  padding: 20px 24px;
+  text-align: center;
+}
+
+/* Bottom Navigation */
+.fetchsafe-nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0;
+  height: 80px;
+}
+
+.fetchsafe-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  cursor: pointer;
+  padding: 8px;
+  gap: 4px;
+  transition: all 0.2s ease;
+
+  ion-icon {
+    font-size: 24px;
+    color: var(--fetchsafe-text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  &.active ion-icon {
+    color: var(--fetchsafe-primary);
+  }
+
+  &:hover ion-icon {
+    color: var(--fetchsafe-primary);
+  }
+
+  /* Override for panic button container */
+  &.panic-nav {
+    padding: 0;
+    gap: 0;
+  }
+}
+
+.fetchsafe-nav-label {
+  font-size: 12px;
+  color: var(--fetchsafe-text-secondary);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.fetchsafe-nav-item.active .fetchsafe-nav-label {
+  color: var(--fetchsafe-primary);
+}
+
+.fetchsafe-nav-item:hover .fetchsafe-nav-label {
+  color: var(--fetchsafe-primary);
+}
+
+/* Panic Button */
+.fetchsafe-panic-button {
+  background: var(--fetchsafe-error);
+  color: white;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border: 3px solid white;
+  gap: 0;
+  text-align: center;
+  position: relative;
+
+  ion-icon {
+    font-size: 12px;
+    color: white !important;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+
+  .fetchsafe-nav-label {
+    color: white !important;
+    font-size: 8px;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.fetchsafe-bottom-spacing {
+  height: 20px;
 }

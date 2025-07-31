@@ -1,0 +1,150 @@
+<!-- Header with FetchSafe logo and back button -->
+<ion-header class="fetchsafe-header">
+  <ion-toolbar>
+    <div class="header-container">
+      <ion-button fill="clear" class="back-btn" (click)="goBack()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+
+      <div class="logo-container">
+        <div class="logo-circle">
+          <ion-icon name="shield-checkmark" class="logo-icon"></ion-icon>
+        </div>
+        <span class="logo-text">FetchSafe</span>
+      </div>
+
+      <div class="header-spacer"></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="schedule-content">
+  <div class="page-title">
+    <h1>View Schedule</h1>
+  </div>
+
+  <div class="schedule-container">
+    <div class="assigned-schedule-section">
+      <div class="section-header">
+        <h2>Assigned Schedule</h2>
+        <div class="header-actions" *ngIf="hasSchedules && monthGroups.length > 0">
+          <ion-button
+            fill="clear"
+            size="small"
+            class="select-button"
+            (click)="toggleSelectionMode()">
+            {{ isSelectionMode ? 'Cancel' : 'Select' }}
+          </ion-button>
+          <ion-button
+            fill="clear"
+            size="small"
+            class="clear-button"
+            (click)="clearSchedules()">
+            Clear All
+          </ion-button>
+        </div>
+      </div>
+
+      <!-- Selection Actions -->
+      <div class="selection-actions" *ngIf="isSelectionMode && selectedSchedules.size > 0">
+        <ion-button
+          fill="solid"
+          color="danger"
+          size="small"
+          (click)="deleteSelectedSchedules()">
+          Delete Selected ({{ selectedSchedules.size }})
+        </ion-button>
+      </div>
+
+      <!-- Dynamic Schedule Display -->
+      <div *ngIf="hasSchedules && monthGroups.length > 0">
+        <div class="month-section" *ngFor="let monthGroup of monthGroups">
+          <h3 class="month-title">{{ monthGroup.month }} {{ monthGroup.year }}</h3>
+          <div class="schedule-card">
+            <div class="schedule-item"
+                 *ngFor="let item of monthGroup.schedules"
+                 [class.selected]="isScheduleSelected(item.id)"
+                 (click)="isSelectionMode ? toggleScheduleSelection(item.id) : null">
+
+              <!-- Selection Checkbox -->
+              <div class="selection-column" *ngIf="isSelectionMode">
+                <ion-checkbox
+                  [checked]="isScheduleSelected(item.id)"
+                  (ionChange)="toggleScheduleSelection(item.id)">
+                </ion-checkbox>
+              </div>
+
+              <div class="date-column">
+                <span class="date-number">{{ item.date }}</span>
+              </div>
+              <div class="details-column">
+                <div class="name">{{ item.name }}</div>
+                <div class="day">{{ item.day }}</div>
+              </div>
+              <div class="time-column">
+                <span class="time">{{ item.time }}</span>
+              </div>
+
+              <!-- Delete Button -->
+              <div class="action-column" *ngIf="!isSelectionMode">
+                <ion-button
+                  fill="clear"
+                  size="small"
+                  color="danger"
+                  (click)="deleteSchedule(item.id)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!hasSchedules || monthGroups.length === 0" class="empty-state">
+        <ion-icon name="calendar-outline" class="empty-icon"></ion-icon>
+        <h3>No Schedules Yet</h3>
+        <p>Create your first schedule to see it here</p>
+        <ion-button
+          fill="solid"
+          class="create-button"
+          (click)="goBack()">
+          Create Schedule
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom spacing for navigation -->
+  <div class="bottom-spacing"></div>
+</ion-content>
+
+<!-- FetchSafe Bottom Navigation -->
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item active" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item panic-nav">
+        <div class="fetchsafe-panic-button" (click)="panicAlert()">
+          <ion-icon name="warning-outline"></ion-icon>
+          <span class="fetchsafe-nav-label">Panic</span>
+        </div>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

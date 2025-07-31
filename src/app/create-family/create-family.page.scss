@@ -1,0 +1,118 @@
+.family-form-group {
+  margin: 24px 0 6px 0;
+}
+.family-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 4px;
+  margin-left: 2px;
+}
+.family-input {
+  border: 1.2px solid #19a5b9;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 0;
+}
+.upload-photo-btn {
+  border: 1.6px solid #19a5b9;
+  color: #19a5b9;
+  border-radius: 22px;
+  background: #fff;
+  padding: 6px 20px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 0 auto 4px auto;
+}
+.family-photo-preview {
+  display: block;
+  margin: 10px auto 0 auto;
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 1px solid #e2e2e2;
+}
+.member-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+.member-name-input {
+  flex: 2;
+  border: 1px solid #b8e0e6;
+  border-radius: 16px;
+  margin-right: 4px;
+}
+.member-role-select {
+  flex: 1;
+  border-radius: 16px;
+  --placeholder-color: #888;
+}
+.remove-member-btn {
+  background: transparent;
+  border: none;
+  color: #ff3860;
+  font-size: 1.6em;
+  margin-left: 2px;
+}
+.add-member-btn {
+  color: #19a5b9;
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: 1.03em;
+  margin: 4px 0 0 2px;
+  cursor: pointer;
+}
+.finish-btn {
+  --background: #19a5b9;
+  --border-radius: 18px;
+  width: 70vw;
+  max-width: 330px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.cancel-btn {
+  color: #222;
+  text-align: center;
+  font-size: 1em;
+  margin-top: 2px;
+  cursor: pointer;
+}
+.fetchsafe-bottom-nav {
+  background: #fff;
+  box-shadow: 0 -1px 6px rgba(0,0,0,0.04);
+}
+.fetchsafe-nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3em 0;
+  width: 100%;
+}
+.fetchsafe-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #19a5b9;
+  opacity: 0.85;
+  font-size: 1.04em;
+  transition: color 0.18s, opacity 0.18s;
+  cursor: pointer;
+}
+.fetchsafe-nav-item.active, .fetchsafe-nav-item:active {
+  color: #128b97;
+  opacity: 1;
+}
+.fetchsafe-nav-item ion-icon {
+  font-size: 21px;
+  margin-bottom: 1px;
+}
+.fetchsafe-nav-label {
+  font-size: 0.89em;
+}

@@ -1,0 +1,94 @@
+<ion-content class="ion-padding register-bg">
+  <div class="register-container">
+    <div class="logo-section">
+      <svg class="logo-svg" width="54" height="54" viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path d="M41 6L73 22V58L41 76L9 58V22L41 6Z" fill="#19a5b9" fill-opacity="0.18" stroke="#19a5b9" stroke-width="3"/>
+          <circle cx="30" cy="36" r="10" fill="#19a5b9"/>
+          <rect x="44" y="32" width="20" height="15" rx="5" fill="#19a5b9" fill-opacity="0.7"/>
+          <path d="M54 40L60 46L68 34" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <span class="app-name">Fetch<span class="safe-word">Safe</span></span>
+    </div>
+    <div class="register-title">Create your secure account</div>
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="register-form" novalidate>
+      <!-- Full Name -->
+      <div class="register-input">
+        <ion-input type="text" formControlName="fullName" placeholder="Full Name"></ion-input>
+      </div>
+      <div class="error-message" *ngIf="registerForm.get('fullName')?.hasError('required') && registerForm.get('fullName')?.touched">
+        Full name is required.
+      </div>
+
+      <!-- Username -->
+      <div class="register-input">
+        <ion-input type="text" formControlName="userName" placeholder="Username"></ion-input>
+      </div>
+      <div class="error-message" *ngIf="registerForm.get('userName')?.hasError('required') && registerForm.get('userName')?.touched">
+        Username is required.
+      </div>
+      <div class="error-message" *ngIf="registerForm.get('userName')?.hasError('minlength') && registerForm.get('userName')?.touched">
+        Username must be at least 4 characters.
+      </div>
+
+      <!-- Email -->
+      <div class="register-input">
+        <ion-input type="email" formControlName="email" placeholder="Email Address"></ion-input>
+      </div>
+      <div class="error-message" *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">
+        Email is required.
+      </div>
+      <div class="error-message" *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched">
+        Enter a valid email.
+      </div>
+
+      <!-- Contact Number -->
+      <div class="register-input">
+        <ion-input type="tel" formControlName="contactNumber" placeholder="Contact Number"></ion-input>
+      </div>
+      <div class="error-message" *ngIf="registerForm.get('contactNumber')?.hasError('required') && registerForm.get('contactNumber')?.touched">
+        Contact number is required.
+      </div>
+      <div class="error-message" *ngIf="registerForm.get('contactNumber')?.hasError('pattern') && registerForm.get('contactNumber')?.touched">
+        Contact number must be numeric.
+      </div>
+
+      <!-- Password -->
+      <div class="register-input">
+        <ion-input type="password" formControlName="passWord" placeholder="Password"></ion-input>
+      </div>
+      <div class="error-message" *ngIf="registerForm.get('passWord')?.hasError('required') && registerForm.get('passWord')?.touched">
+        Password is required.
+      </div>
+      <div class="error-message" *ngIf="registerForm.get('passWord')?.hasError('minlength') && registerForm.get('passWord')?.touched">
+        Password must be at least 6 characters.
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="register-input">
+        <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
+      </div>
+      <div class="error-message" *ngIf="registerForm.hasError('notSame') && registerForm.get('confirmPassword')?.touched">
+        Passwords do not match.
+      </div>
+
+      <!-- Upload Photo -->
+      <div class="upload-photo-box">
+        <label class="upload-label" for="profile-photo">
+          <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
+          <span>Upload Profile Photo</span>
+          <input id="profile-photo" type="file" accept="image/*" hidden (change)="onPhotoSelected($event)">
+        </label>
+        <img *ngIf="photoPreviewUrl" [src]="photoPreviewUrl" alt="Profile Preview" class="photo-preview" />
+      </div>
+      <ion-button expand="block" class="register-btn" type="submit" [disabled]="registerForm.invalid">
+        Register
+      </ion-button>
+    </form>
+    <div class="register-link">
+      <span>Already have an account?</span>
+      <a (click)="goToLogin()">Login</a>
+    </div>
+  </div>
+</ion-content>

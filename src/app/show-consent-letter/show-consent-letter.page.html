@@ -1,0 +1,178 @@
+<!-- Header with FetchSafe logo and back button -->
+<ion-header class="fetchsafe-header">
+  <ion-toolbar>
+    <div class="header-container">
+      <ion-button fill="clear" class="back-btn" (click)="goBack()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+
+      <div class="logo-container">
+        <div class="logo-circle">
+          <ion-icon name="shield-checkmark" class="logo-icon"></ion-icon>
+        </div>
+        <span class="logo-text">FetchSafe</span>
+      </div>
+
+      <div class="header-spacer"></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="consent-display-content">
+  <div class="page-title">
+    <h1>Consent Letter</h1>
+  </div>
+
+  <!-- Consent Letter Display -->
+  <div class="consent-display" *ngIf="consentData">
+    <!-- Consent Details (Firebase fields) -->
+    <div class="consent-details" *ngIf="consentData.parentName">
+      <div class="detail-section">
+        <h3>Parent/Guardian Information</h3>
+        <div class="detail-item">
+          <span class="detail-label">Name:</span>
+          <span class="detail-value">{{ consentData.parentName }}</span>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h3>Child Information</h3>
+        <div class="detail-item">
+          <span class="detail-label">Name:</span>
+          <span class="detail-value">{{ consentData.childName }}</span>
+        </div>
+      </div>
+
+      <div class="detail-section" *ngIf="consentData.authorizedPersons && consentData.authorizedPersons.length > 0">
+        <h3>Authorized Pickup Persons</h3>
+        <div class="authorized-list">
+          <div class="authorized-person" *ngFor="let person of consentData.authorizedPersons">
+            {{ person }}
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h3>Emergency Contact</h3>
+        <div class="detail-item">
+          <span class="detail-label">Name:</span>
+          <span class="detail-value">{{ consentData.emergencyContact }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Phone:</span>
+          <span class="detail-value">{{ consentData.emergencyPhone }}</span>
+        </div>
+      </div>
+
+      <div class="detail-section" *ngIf="consentData.specialInstructions">
+        <h3>Special Instructions</h3>
+        <div class="detail-item">
+          <span class="detail-value">{{ consentData.specialInstructions }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter Content (Legacy) -->
+    <div class="letter-display" *ngIf="consentData.letter">
+      <h3>Additional Message</h3>
+      <div class="letter-text">
+        {{ consentData.letter }}
+      </div>
+
+      <!-- Signature Display -->
+      <div class="signature-display">
+        <img [src]="consentData.signature" alt="Signature" class="signature-image" />
+        <div class="signature-label">Parent/Guardian Signature</div>
+      </div>
+    </div>
+
+    <!-- Fetcher Options -->
+    <div class="fetcher-options">
+      <div class="option-item">
+        <ion-checkbox
+          [checked]="consentData.isEmergencyFetcher"
+          [disabled]="true"
+          class="readonly-checkbox">
+        </ion-checkbox>
+        <span class="option-label">Emergency Fetcher</span>
+      </div>
+
+      <div class="option-item">
+        <ion-checkbox
+          [checked]="consentData.isOneTimeFetcher"
+          [disabled]="true"
+          class="readonly-checkbox">
+        </ion-checkbox>
+        <span class="option-label">One time Fetcher</span>
+      </div>
+    </div>
+
+    <!-- Date Information -->
+    <div class="date-info">
+      <div class="date-item">
+        <span class="date-label">Date Issued</span>
+        <span class="date-value">{{ formatDate(consentData.createdAt) }}</span>
+      </div>
+      <div class="date-item">
+        <span class="date-label">Valid Until</span>
+        <span class="date-value">{{ getValidUntilDate() }}</span>
+      </div>
+    </div>
+
+    <!-- Done Button -->
+    <div class="button-container">
+      <ion-button
+        expand="block"
+        class="done-button"
+        (click)="goBack()">
+        Done
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- No Consent Message -->
+  <div class="no-consent" *ngIf="!consentData">
+    <ion-icon name="document-outline" class="no-consent-icon"></ion-icon>
+    <h3>No Consent Letter Found</h3>
+    <p>Create a consent letter first to view it here</p>
+    <ion-button
+      fill="solid"
+      class="create-button"
+      (click)="createConsent()">
+      Create Consent Letter
+    </ion-button>
+  </div>
+
+  <!-- Bottom spacing for navigation -->
+  <div class="bottom-spacing"></div>
+</ion-content>
+
+<!-- FetchSafe Bottom Navigation -->
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item active" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item panic-nav">
+        <div class="fetchsafe-panic-button" (click)="panicAlert()">
+          <ion-icon name="warning-outline"></ion-icon>
+          <span class="fetchsafe-nav-label">Panic</span>
+        </div>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

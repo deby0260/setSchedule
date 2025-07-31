@@ -1,0 +1,30 @@
+<ion-content class="ion-padding login-bg">
+  <div class="login-container">
+    <div class="logo-section">
+      <img src="assets/logo-fetchsafe.jpg" alt="Fetch Safe Logo" class="logo-img" />
+      <span class="app-name">Fetch<br>Safe</span>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input type="text" formControlName="username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
+        <ion-button fill="clear" slot="end" type="button" (click)="togglePassword()" tabindex="-1">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-button expand="block" class="login-btn" type="submit" [disabled]="loginForm.invalid">
+        Login
+      </ion-button>
+    </form>
+    <div class="register-link">
+      <ion-text>
+        <span>Don't have an account?</span>
+        <a (click)="register()">Register</a>
+      </ion-text>
+    </div>
+  </div>
+</ion-content>

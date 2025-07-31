@@ -1,0 +1,172 @@
+<!-- Header with FetchSafe logo and notification icon -->
+<ion-header class="fetchsafe-header">
+  <ion-toolbar>
+    <div class="fetchsafe-header-content">
+      <div class="fetchsafe-logo-section">
+        <div class="fetchsafe-logo-container">
+          <div class="fetchsafe-shield">
+            <div class="fetchsafe-figures">
+              <div class="fetchsafe-adult-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+              <div class="fetchsafe-child-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+            </div>
+            <div class="fetchsafe-checkmark-badge">
+              <ion-icon name="checkmark" class="checkmark-icon"></ion-icon>
+            </div>
+          </div>
+        </div>
+        <span class="fetchsafe-logo-text">FetchSafe</span>
+      </div>
+
+      <ion-button fill="clear" class="fetchsafe-notification-btn" (click)="goToNotifications()">
+        <ion-icon name="notifications-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="settings-content">
+
+  <!-- Notification Settings -->
+  <div class="settings-section">
+    <h2 class="section-title">Notification</h2>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <span class="setting-label">Enable app notifications</span>
+      </div>
+      <ion-toggle
+        [(ngModel)]="settings.appNotifications"
+        (ionChange)="onSettingChange('appNotifications', $event)"
+        class="setting-toggle">
+      </ion-toggle>
+    </div>
+  </div>
+
+  <!-- Appearance Settings -->
+  <div class="settings-section">
+    <h2 class="section-title">Appearance</h2>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <span class="setting-label">Enable SMS notifications</span>
+      </div>
+      <ion-toggle
+        [(ngModel)]="settings.smsNotifications"
+        (ionChange)="onSettingChange('smsNotifications', $event)"
+        class="setting-toggle">
+      </ion-toggle>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <span class="setting-label">Dark Mode</span>
+      </div>
+      <ion-toggle
+        [(ngModel)]="settings.darkMode"
+        (ionChange)="onSettingChange('darkMode', $event)"
+        class="setting-toggle">
+      </ion-toggle>
+    </div>
+  </div>
+
+  <!-- Account Settings -->
+  <div class="settings-section">
+    <h2 class="section-title">Account</h2>
+
+    <div class="setting-item clickable" (click)="changeLanguage()">
+      <div class="setting-info">
+        <span class="setting-label">Language</span>
+      </div>
+      <div class="setting-value">
+        <span class="value-text">{{ currentLanguage }}</span>
+        <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
+      </div>
+    </div>
+
+    <div class="setting-item clickable" (click)="editProfile()">
+      <div class="setting-info">
+        <span class="setting-label">Edit Profile</span>
+      </div>
+      <div class="setting-value">
+        <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Settings -->
+  <div class="settings-section">
+    <h2 class="section-title">Privacy</h2>
+
+    <div class="setting-item clickable highlighted" (click)="editPrivacyProfile()">
+      <div class="setting-info">
+        <span class="setting-label">Edit Profile</span>
+      </div>
+      <div class="setting-value">
+        <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
+      </div>
+    </div>
+
+    <div class="setting-item clickable highlighted" (click)="changePassword()">
+      <div class="setting-info">
+        <span class="setting-label">Change Password</span>
+      </div>
+      <div class="setting-value">
+        <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Developer Settings -->
+  <div class="settings-section">
+    <h2 class="section-title">Developer</h2>
+
+    <div class="setting-item clickable highlighted" (click)="goToFirebaseTest()">
+      <div class="setting-info">
+        <span class="setting-label">🔥 Firebase Test</span>
+        <span class="setting-description">Test Firebase connectivity and data operations</span>
+      </div>
+      <div class="setting-value">
+        <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom spacing for navigation -->
+  <div class="bottom-spacing"></div>
+</ion-content>
+
+<!-- FetchSafe Bottom Navigation -->
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item panic-nav">
+        <div class="fetchsafe-panic-button" (click)="panicAlert()">
+          <ion-icon name="warning-outline"></ion-icon>
+          <span class="fetchsafe-nav-label">Panic</span>
+        </div>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item active" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,168 @@
+<!-- Header with FetchSafe logo -->
+<ion-header class="fetchsafe-header">
+  <ion-toolbar>
+    <div class="fetchsafe-header-content">
+      <div class="fetchsafe-logo-section">
+        <div class="fetchsafe-logo-container">
+          <div class="fetchsafe-shield">
+            <div class="fetchsafe-figures">
+              <div class="fetchsafe-adult-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+              <div class="fetchsafe-child-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+            </div>
+            <div class="fetchsafe-checkmark-badge">
+              <ion-icon name="checkmark" class="checkmark-icon"></ion-icon>
+            </div>
+          </div>
+        </div>
+        <span class="fetchsafe-logo-text">FetchSafe</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="family-content">
+  <!-- Family Header -->
+  <div class="family-header">
+    <h1 class="family-name">{{ familyData.name }}</h1>
+    <p class="family-created">Created on {{ familyData.createdDate }}</p>
+
+    <!-- Family Photo -->
+    <div class="family-photo-container">
+      <div class="family-photo" *ngIf="!familyData.photo">
+        <span class="no-photo-text">No Photo</span>
+      </div>
+      <img [src]="familyData.photo" alt="Family Photo" class="family-photo" *ngIf="familyData.photo">
+    </div>
+  </div>
+
+  <!-- Family Members Section -->
+  <div class="family-members-section">
+    <h2 class="section-title">Family Members</h2>
+
+    <div class="members-list">
+      <div class="member-item" *ngFor="let member of familyMembers"
+           [class.protected-member]="!canRemoveMember(member)">
+        <div class="member-avatar">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <!-- Protected member indicator for guardian and child -->
+          <div class="protected-indicator" *ngIf="!canRemoveMember(member)">
+            <ion-icon name="shield-checkmark" class="shield-icon"></ion-icon>
+          </div>
+        </div>
+        <div class="member-info">
+          <h3 class="member-name">
+            {{ member.name }}
+            <span class="protected-label" *ngIf="member.id === 'guardian-parent'">
+              (Guardian)
+            </span>
+            <span class="protected-label" *ngIf="member.id === 'main-child'">
+              (Protected)
+            </span>
+            <span class="protected-label" *ngIf="member.id === 'removable-child'">
+              (Protected Child)
+            </span>
+          </h3>
+          <p class="member-role">{{ member.role }}</p>
+          <!-- Show additional info for the removable child -->
+          <div class="child-details" *ngIf="member.id === 'removable-child'">
+            <p class="child-info">
+              <ion-icon name="school-outline"></ion-icon>
+              Grade 5 Student
+            </p>
+            <p class="child-info">
+              <ion-icon name="calendar-outline"></ion-icon>
+              10 years old
+            </p>
+          </div>
+          <p class="member-contact" *ngIf="member.phone && member.phone !== 'N/A'">
+            <ion-icon name="call-outline"></ion-icon>
+            {{ member.phone }}
+          </p>
+          <p class="member-contact" *ngIf="member.email && member.email !== 'N/A'">
+            <ion-icon name="mail-outline"></ion-icon>
+            {{ member.email }}
+          </p>
+        </div>
+        <div class="member-actions">
+          <!-- Enhanced remove button with icon and text for removable members -->
+          <ion-button
+            fill="solid"
+            size="small"
+            color="danger"
+            class="remove-btn enhanced-remove-btn"
+            (click)="removeMember(member.id, member.name)"
+            *ngIf="canRemoveMember(member)"
+            title="Remove {{ member.name }}">
+            <ion-icon name="trash-outline" slot="start"></ion-icon>
+            Remove
+          </ion-button>
+          <!-- Protected indicator for non-removable members -->
+          <div class="protected-info" *ngIf="!canRemoveMember(member)"
+               [title]="member.id === 'guardian-parent' ? 'Guardian cannot be removed' : 'Protected member cannot be removed'">
+            <ion-icon name="lock-closed-outline" class="lock-icon"></ion-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Member Button -->
+    <div class="add-member-container">
+      <ion-button
+        fill="clear"
+        class="add-member-btn"
+        (click)="addMember()">
+        <ion-icon name="add" slot="start"></ion-icon>
+        Add Member
+      </ion-button>
+    </div>
+
+    <!-- Edit Family Button -->
+    <div class="edit-family-container">
+      <ion-button
+        expand="block"
+        class="edit-family-btn"
+        (click)="editFamily()">
+        Edit Family
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Bottom spacing for navigation -->
+  <div class="bottom-spacing"></div>
+</ion-content>
+
+<!-- FetchSafe Bottom Navigation -->
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item active" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item panic-nav">
+        <div class="fetchsafe-panic-button" (click)="panicAlert()">
+          <ion-icon name="warning-outline"></ion-icon>
+          <span class="fetchsafe-nav-label">Panic</span>
+        </div>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

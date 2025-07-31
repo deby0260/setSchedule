@@ -1,0 +1,528 @@
+/* QR Code Page Styles */
+@import '../../global-fetchsafe.scss';
+
+/* FetchSafe Logo Styles */
+.fetchsafe-header {
+  --background: var(--fetchsafe-bg-primary);
+  --border-color: var(--fetchsafe-border-light);
+  box-shadow: 0 2px 8px var(--fetchsafe-shadow-light);
+
+  ion-toolbar {
+    --background: var(--fetchsafe-bg-primary);
+    --border-width: 0;
+    --min-height: 64px;
+  }
+}
+
+.fetchsafe-header-content {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 64px;
+}
+
+.fetchsafe-back-button {
+  --color: var(--fetchsafe-text-secondary);
+  --color-hover: var(--fetchsafe-primary);
+  --padding-start: 0;
+  --padding-end: 16px;
+  margin-right: 16px;
+}
+
+.fetchsafe-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: center;
+}
+
+/* FetchSafe Logo Container */
+.fetchsafe-logo-container {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+/* Shield Outline */
+.fetchsafe-shield {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border: 3px solid var(--fetchsafe-primary);
+  border-radius: 8px 8px 20px 20px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+
+/* Human Figures Container */
+.fetchsafe-figures {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  position: relative;
+}
+
+/* Adult Figure */
+.fetchsafe-adult-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .figure-head {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--fetchsafe-primary);
+    margin-bottom: 1px;
+  }
+
+  .figure-body {
+    width: 10px;
+    height: 14px;
+    border-radius: 5px 5px 0 0;
+    background: var(--fetchsafe-primary);
+  }
+}
+
+/* Child Figure */
+.fetchsafe-child-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .figure-head {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fetchsafe-primary);
+    margin-bottom: 1px;
+  }
+
+  .figure-body {
+    width: 8px;
+    height: 10px;
+    border-radius: 4px 4px 0 0;
+    background: var(--fetchsafe-primary);
+  }
+}
+
+/* Checkmark Badge */
+.fetchsafe-checkmark-badge {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 16px;
+  height: 16px;
+  background: var(--fetchsafe-primary);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+
+  .checkmark-icon {
+    font-size: 9px;
+    color: white;
+    font-weight: bold;
+  }
+}
+
+/* Logo Text */
+.fetchsafe-logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--fetchsafe-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Overall Page Styling */
+.qr-content {
+  background-color: #ffffff !important;
+  --background: #ffffff !important;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Custom Header */
+.custom-header {
+  ion-toolbar {
+    --background: #ffffff;
+    --border-width: 0;
+    --min-height: 60px;
+  }
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 60px;
+}
+
+.back-button {
+  --color: #333;
+  --padding-start: 0;
+  --padding-end: 8px;
+  min-width: 40px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+  margin-left: -40px; // Compensate for back button
+}
+
+.logo-icon {
+  font-size: 28px;
+  color: #2dd4bf;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.header-spacer {
+  width: 40px; // Balance the back button
+}
+
+/* QR Container */
+.qr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: calc(100vh - 140px);
+}
+
+/* Title Section */
+.title-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.qr-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.qr-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 16px 0;
+  font-weight: 500;
+}
+
+/* Status Indicator */
+.status-indicator {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  &.online {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+
+    .status-icon {
+      color: #22c55e;
+    }
+  }
+
+  &.offline {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+
+    .status-icon {
+      color: #ef4444;
+    }
+  }
+}
+
+.status-icon {
+  font-size: 14px;
+}
+
+.status-text {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+/* QR Code Display */
+.qr-code-container {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-code-wrapper {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid #f0f0f0;
+}
+
+.qr-code-image {
+  display: block;
+  border-radius: 8px;
+  width: 280px;
+  height: 280px;
+  object-fit: contain;
+}
+
+.qr-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 280px;
+  background: #f8f9fa;
+  border-radius: 8px;
+
+  ion-spinner {
+    margin-bottom: 12px;
+    --color: #2dd4bf;
+  }
+
+  p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+  }
+}
+
+/* Instructions */
+.instructions-section {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.instructions-text {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Refresh Button */
+.refresh-section {
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.refresh-button {
+  --background: #2dd4bf;
+  --color: white;
+  --border-radius: 25px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+
+  &:hover {
+    --background: #26c2b0;
+  }
+}
+
+/* QR Info Section */
+.qr-info-section {
+  width: 100%;
+  max-width: 280px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: auto;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.info-label {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* FetchSafe Bottom Navigation */
+.fetchsafe-bottom-nav {
+  --background: var(--fetchsafe-bg-primary);
+  --border-color: var(--fetchsafe-border-light);
+  box-shadow: 0 -2px 8px var(--fetchsafe-shadow-light);
+
+  ion-toolbar {
+    --background: var(--fetchsafe-bg-primary);
+    --border-width: 0;
+    --min-height: 80px;
+  }
+}
+
+.fetchsafe-nav-container {
+  display: flex !important;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 16px;
+  height: 80px;
+  background: white !important; /* Fallback background */
+  visibility: visible !important;
+}
+
+.fetchsafe-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  cursor: pointer;
+  padding: 8px 4px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--fetchsafe-bg-secondary);
+  }
+
+  &.active {
+    .fetchsafe-nav-label {
+      color: var(--fetchsafe-primary) !important;
+      color: #20B2AA !important; /* Fallback color */
+      font-weight: 600;
+    }
+
+    ion-icon {
+      color: var(--fetchsafe-primary) !important;
+      color: #20B2AA !important; /* Fallback color */
+    }
+  }
+
+  ion-icon {
+    font-size: 24px !important;
+    color: var(--fetchsafe-text-secondary) !important;
+    color: #666666 !important; /* Fallback color */
+    margin-bottom: 4px;
+    transition: color 0.2s ease;
+    display: block !important;
+    visibility: visible !important;
+  }
+}
+
+.fetchsafe-nav-label {
+  font-size: 12px;
+  color: var(--fetchsafe-text-secondary) !important;
+  color: #666666 !important; /* Fallback color */
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+  transition: color 0.2s ease;
+  display: block !important;
+  visibility: visible !important;
+}
+
+.panic-nav {
+  padding: 0;
+  gap: 0;
+
+  .fetchsafe-panic-button {
+    background: var(--fetchsafe-error);
+    color: white;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: 3px solid white;
+    gap: 0;
+    text-align: center;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    ion-icon {
+      color: white !important;
+      font-size: 20px;
+      margin-bottom: 2px;
+    }
+
+    .fetchsafe-nav-label {
+      color: white !important;
+      font-weight: 600;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+.bottom-spacing {
+  height: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .qr-container {
+    padding: 20px 16px;
+  }
+
+  .qr-title {
+    font-size: 24px;
+  }
+
+  .qr-code-wrapper {
+    padding: 16px;
+  }
+
+  .qr-info-section {
+    max-width: 100%;
+  }
+}

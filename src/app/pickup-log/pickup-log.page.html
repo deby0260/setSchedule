@@ -1,0 +1,140 @@
+<!-- Header with FetchSafe logo and notification -->
+<ion-header class="fetchsafe-header">
+  <ion-toolbar>
+    <div class="fetchsafe-header-content">
+      <div class="fetchsafe-logo-section">
+        <div class="fetchsafe-logo-container">
+          <div class="fetchsafe-shield">
+            <div class="fetchsafe-figures">
+              <div class="fetchsafe-adult-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+              <div class="fetchsafe-child-figure">
+                <div class="figure-head"></div>
+                <div class="figure-body"></div>
+              </div>
+            </div>
+            <div class="fetchsafe-checkmark-badge">
+              <ion-icon name="checkmark" class="checkmark-icon"></ion-icon>
+            </div>
+          </div>
+        </div>
+        <span class="fetchsafe-logo-text">FetchSafe</span>
+      </div>
+
+      <ion-button fill="clear" class="fetchsafe-notification-btn" (click)="goToNotifications()">
+        <ion-icon name="notifications-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="pickup-log-content">
+  <!-- Date Sections -->
+  <div class="log-container">
+
+    <!-- Today Section -->
+    <div class="date-section" *ngIf="todayLogs.length > 0">
+      <h2 class="date-header">Today</h2>
+      <div class="log-item" *ngFor="let log of todayLogs">
+        <div class="log-content">
+          <div class="log-icon">
+            <ion-icon name="location" class="location-icon"></ion-icon>
+          </div>
+          <div class="log-details">
+            <div class="log-header">
+              <span class="log-date">{{ log.date }}</span>
+              <span class="log-time">{{ log.time }}</span>
+              <ion-icon name="close" class="close-icon" (click)="removeLog(log.id)"></ion-icon>
+            </div>
+            <div class="log-message">{{ log.message }}</div>
+            <div class="log-person">{{ log.person }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Yesterday Section -->
+    <div class="date-section" *ngIf="yesterdayLogs.length > 0">
+      <h2 class="date-header">Yesterday</h2>
+      <div class="log-item" *ngFor="let log of yesterdayLogs">
+        <div class="log-content">
+          <div class="log-icon">
+            <ion-icon name="location" class="location-icon"></ion-icon>
+          </div>
+          <div class="log-details">
+            <div class="log-header">
+              <span class="log-date">{{ log.date }}</span>
+              <span class="log-time">{{ log.time }}</span>
+              <ion-icon name="close" class="close-icon" (click)="removeLog(log.id)"></ion-icon>
+            </div>
+            <div class="log-message">{{ log.message }}</div>
+            <div class="log-person">{{ log.person }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Older Logs Section -->
+    <div class="date-section" *ngIf="olderLogs.length > 0">
+      <div class="log-item" *ngFor="let log of olderLogs">
+        <div class="log-content">
+          <div class="log-icon">
+            <ion-icon name="location" class="location-icon"></ion-icon>
+          </div>
+          <div class="log-details">
+            <div class="log-header">
+              <span class="log-date">{{ log.date }}</span>
+              <span class="log-time">{{ log.time }}</span>
+              <ion-icon name="close" class="close-icon" (click)="removeLog(log.id)"></ion-icon>
+            </div>
+            <div class="log-message">{{ log.message }}</div>
+            <div class="log-person">{{ log.person }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="todayLogs.length === 0 && yesterdayLogs.length === 0 && olderLogs.length === 0">
+      <ion-icon name="document-text-outline" class="empty-icon"></ion-icon>
+      <h3>No Pickup Logs</h3>
+      <p>Pickup logs will appear here when schedules are completed</p>
+    </div>
+
+  </div>
+
+  <!-- Bottom spacing for navigation -->
+  <div class="bottom-spacing"></div>
+</ion-content>
+
+<!-- FetchSafe Bottom Navigation -->
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item panic-nav">
+        <div class="fetchsafe-panic-button" (click)="panicAlert()">
+          <ion-icon name="warning-outline"></ion-icon>
+          <span class="fetchsafe-nav-label">Panic</span>
+        </div>
+      </div>
+      <div class="fetchsafe-nav-item active" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

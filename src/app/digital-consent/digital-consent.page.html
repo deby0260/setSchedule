@@ -1,0 +1,226 @@
+<!-- Header with FetchSafe logo and back button -->
+<ion-header class="fetchsafe-header">
+  <ion-toolbar>
+    <div class="header-container">
+      <ion-button fill="clear" class="back-btn" (click)="goBack()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+
+      <div class="logo-container">
+        <div class="logo-circle">
+          <ion-icon name="shield-checkmark" class="logo-icon"></ion-icon>
+        </div>
+        <span class="logo-text">FetchSafe</span>
+      </div>
+
+      <div class="header-spacer"></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="consent-content">
+  <div class="page-title">
+    <h1>Consent Letter</h1>
+  </div>
+
+  <div class="consent-form">
+    <!-- Parent Information -->
+    <div class="form-section">
+      <label class="section-label">Parent/Guardian Name *</label>
+      <ion-input
+        [(ngModel)]="parentName"
+        name="parentName"
+        placeholder="Enter parent/guardian name"
+        class="form-input"
+        required>
+      </ion-input>
+    </div>
+
+    <!-- Child Information -->
+    <div class="form-section">
+      <label class="section-label">Child Name *</label>
+      <ion-input
+        [(ngModel)]="childName"
+        name="childName"
+        placeholder="Enter child's name"
+        class="form-input"
+        required>
+      </ion-input>
+    </div>
+
+    <!-- Authorized Persons -->
+    <div class="form-section">
+      <label class="section-label">Authorized Pickup Persons *</label>
+      <div class="authorized-persons">
+        <div class="authorized-person-item" *ngFor="let person of authorizedPersons; let i = index">
+          <ion-input
+            [(ngModel)]="authorizedPersons[i]"
+            [name]="'authorizedPerson' + i"
+            placeholder="Enter authorized person's name"
+            class="form-input">
+          </ion-input>
+          <ion-button
+            fill="clear"
+            size="small"
+            color="danger"
+            *ngIf="authorizedPersons.length > 1"
+            (click)="removeAuthorizedPerson(i)">
+            <ion-icon name="remove-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+        <ion-button
+          fill="clear"
+          size="small"
+          color="primary"
+          (click)="addAuthorizedPerson()">
+          <ion-icon name="add-circle-outline"></ion-icon>
+          Add Person
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Emergency Contact -->
+    <div class="form-section">
+      <label class="section-label">Emergency Contact Name *</label>
+      <ion-input
+        [(ngModel)]="emergencyContact"
+        name="emergencyContact"
+        placeholder="Enter emergency contact name"
+        class="form-input"
+        required>
+      </ion-input>
+    </div>
+
+    <!-- Emergency Phone -->
+    <div class="form-section">
+      <label class="section-label">Emergency Phone Number *</label>
+      <ion-input
+        [(ngModel)]="emergencyPhone"
+        name="emergencyPhone"
+        placeholder="Enter emergency phone number"
+        class="form-input"
+        type="tel"
+        required>
+      </ion-input>
+    </div>
+
+    <!-- Special Instructions -->
+    <div class="form-section">
+      <label class="section-label">Special Instructions</label>
+      <ion-textarea
+        [(ngModel)]="specialInstructions"
+        name="specialInstructions"
+        placeholder="Any special instructions or notes"
+        class="form-textarea"
+        rows="3">
+      </ion-textarea>
+    </div>
+
+    <!-- Letter Section (Legacy) -->
+    <div class="form-section">
+      <label class="section-label">Additional Message</label>
+      <div class="letter-container">
+        <ion-textarea
+          [(ngModel)]="letterContent"
+          name="letterContent"
+          placeholder="Write an additional message (optional)"
+          class="letter-textarea"
+          rows="4"
+          maxlength="500">
+        </ion-textarea>
+      </div>
+    </div>
+
+    <!-- Signature Section -->
+    <div class="form-section">
+      <label class="section-label">Signature</label>
+      <div class="signature-container">
+        <div class="signature-box" (click)="openSignaturePad()">
+          <canvas
+            #signatureCanvas
+            class="signature-canvas"
+            [class.has-signature]="hasSignature">
+          </canvas>
+          <div class="signature-placeholder" *ngIf="!hasSignature">
+            <span>Sign within the box</span>
+          </div>
+          <ion-button
+            fill="clear"
+            size="small"
+            class="clear-signature-btn"
+            *ngIf="hasSignature"
+            (click)="clearSignature($event)">
+            Clear
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toggle Options -->
+    <div class="form-section">
+      <div class="toggle-item">
+        <span class="toggle-label">Emergency Fetcher</span>
+        <ion-toggle
+          [(ngModel)]="isEmergencyFetcher"
+          name="isEmergencyFetcher"
+          class="custom-toggle">
+        </ion-toggle>
+      </div>
+
+      <div class="toggle-item">
+        <span class="toggle-label">One time Fetcher</span>
+        <ion-toggle
+          [(ngModel)]="isOneTimeFetcher"
+          name="isOneTimeFetcher"
+          class="custom-toggle">
+        </ion-toggle>
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <div class="button-container">
+      <ion-button
+        expand="block"
+        class="save-button"
+        [disabled]="!isFormValid() || isLoading"
+        (click)="saveConsent()">
+        <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+        <span *ngIf="!isLoading">Save Consent Letter</span>
+        <span *ngIf="isLoading">Saving...</span>
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Bottom spacing for navigation -->
+  <div class="bottom-spacing"></div>
+</ion-content>
+
+<!-- FetchSafe Bottom Navigation -->
+<ion-footer class="fetchsafe-bottom-nav">
+  <ion-toolbar>
+    <div class="fetchsafe-nav-container">
+      <div class="fetchsafe-nav-item active" (click)="goHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Home</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToFamily()">
+        <ion-icon name="people-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Family</span>
+      </div>
+      <div class="fetchsafe-nav-item panic-nav">
+        <div class="fetchsafe-panic-button" (click)="panicAlert()">
+          <ion-icon name="warning-outline"></ion-icon>
+          <span class="fetchsafe-nav-label">Panic</span>
+        </div>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToDocuments()">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Pickup Logs</span>
+      </div>
+      <div class="fetchsafe-nav-item" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <span class="fetchsafe-nav-label">Settings</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>
